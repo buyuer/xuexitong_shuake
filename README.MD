@@ -31,9 +31,13 @@
             cache_path = "~/"
             (如果adb没添加到path中，就将adb_path设置成adb的完整路径)
             
+            运行main.py文件即可
+            
         Windows系统类似，adb需要自己去官网下载
         网址：https://developer.android.google.cn/studio
         
         六、目前只适应了1920X1080的分辨率，其他分辨率可能会出现识别不准的问题，需要自己适配。主要是重新截一下Resource中的图片
+        
+        七、不同的课程需要修改一下video特征图片
     
     

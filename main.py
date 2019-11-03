@@ -8,12 +8,12 @@ adb_path = "F:\\Development\\SDK\\Android\\android-sdk\\platform-tools\\adb.exe"
 cache_path = "D:\\test\\"
 
 
-def match_template(image, template, md=cv2.TM_CCOEFF_NORMED):
+def match_template(image, template, md=cv2.TM_CCOEFF_NORMED, threshold=0.8):
     # cv2.imshow("image", image)
     # cv2.imshow("template", template)
     result = cv2.matchTemplate(image, template, md)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    if max_val > 0.8:
+    if max_val > threshold:
         return True, max_loc[0] + template.shape[1] / 2, max_loc[1] + template.shape[0] / 2
     else:
         return False, -1, -1
@@ -61,8 +61,8 @@ def find_retry_loc(image):
 
 
 def find_video_loc(image):
-    image_video = cv2.imread("./Resource/video.jpg", 1)
-    return match_template(image, image_video)
+    image_video = cv2.imread("./Resource/video1.jpg", 1)
+    return match_template(image, image_video, threshold=0.6)
 
 
 if __name__ == '__main__':
@@ -134,15 +134,17 @@ if __name__ == '__main__':
                         time.sleep(2)
                         simulate_swipe(screen.shape[1] - 100, screen.shape[0] / 2, 200, screen.shape[0] / 2)
                         print("向右滑动")
+                        time.sleep(3)
                         is_just_play = False
                     else:
                         print("找到了视频标签")
-                        simulate_tap(screen.shape[1] / 2, video_y - 200)
+                        # simulate_tap(screen.shape[1] / 2, video_y - 200)
+                        simulate_tap(video_x, video_y)
                         break
                 else:
                     simulate_swipe(screen.shape[1] - 100, screen.shape[0] / 2, 200, screen.shape[0] / 2)
                     print("向右滑动")
-                    time.sleep(2)
+                    time.sleep(2.5)
 
         if cv2.waitKey(1000) == 27:
             break
