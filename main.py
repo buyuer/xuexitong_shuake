@@ -61,7 +61,7 @@ def find_retry_loc(image):
 
 
 def find_video_loc(image):
-    image_video = cv2.imread("./Resource/video1.jpg", 1)
+    image_video = cv2.imread("./Resource/video2.jpg", 1)
     return match_template(image, image_video, threshold=0.6)
 
 
@@ -80,22 +80,12 @@ if __name__ == '__main__':
             # 如果找到提交按钮，说明需要做题
             print("播放视频中")
             if submit_is_find:
-                print("单选题")
+                abcde = ['A', 'B', 'C', 'D', 'E']
                 option_is_find, option_x, option_y = find_option_loc(screen)
-                simulate_tap(option_x, option_y)
-                print("选中了A选项位置", option_x, option_y)
-                time.sleep(0.05)
-                simulate_tap(submit_x, submit_y)
-                print("点击提交")
-                time.sleep(0.05)
-                yes_is_find, yes_x, yes_y = find_yes_loc(get_screencap())
-                if yes_is_find:
-                    simulate_tap(submit_x, submit_y)
-                    print("提交成功")
-                else:
-                    print("答案错误，尝试B选项")
-                    simulate_tap(option_x, option_y + 50)
-                    print("选中了B选项位置", option_x, option_y)
+                print("单选题")
+                for i in range (0, 5):
+                    simulate_tap(option_x, option_y + 50 * i)
+                    print("选中", abcde[i], "选项位置", option_x, option_y + 50 * i)
                     time.sleep(0.05)
                     simulate_tap(submit_x, submit_y)
                     print("点击提交")
@@ -104,18 +94,9 @@ if __name__ == '__main__':
                     if yes_is_find:
                         simulate_tap(submit_x, submit_y)
                         print("提交成功")
+                        break
                     else:
-                        print("答案错误，尝试C选项")
-                        simulate_tap(option_x, option_y + 100)
-                        print("选中了C选项位置", option_x, option_y + 100)
-                        time.sleep(0.05)
-                        simulate_tap(submit_x, submit_y)
-                        print("点击提交")
-                        time.sleep(0.05)
-                        yes_is_find, yes_x, yes_y = find_yes_loc(get_screencap())
-                        if yes_is_find:
-                            simulate_tap(submit_x, submit_y)
-                            print("提交成功")
+                        print("答案错误，尝试下一个选项")
 
             else:
                 print("不需要做选择题")
