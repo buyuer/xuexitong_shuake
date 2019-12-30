@@ -61,7 +61,7 @@ def find_retry_loc(image):
 
 
 def find_video_loc(image):
-    image_video = cv2.imread("./Resource/video2.jpg", 1)
+    image_video = cv2.imread("./Resource/video.jpg", 1)
     return match_template(image, image_video, threshold=0.6)
 
 
@@ -119,8 +119,8 @@ if __name__ == '__main__':
                         is_just_play = False
                     else:
                         print("找到了视频标签")
-                        # simulate_tap(screen.shape[1] / 2, video_y - 200)
-                        simulate_tap(video_x, video_y)
+                        simulate_tap(screen.shape[1] / 2, video_y - 200)
+                        # simulate_tap(video_x, video_y)
                         break
                 else:
                     simulate_swipe(screen.shape[1] - 100, screen.shape[0] / 2, 200, screen.shape[0] / 2)
